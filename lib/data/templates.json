@@ -1,0 +1,66 @@
+[
+  {
+    "id": 0,
+    "name": "Template 1",
+    "description": "Description for my Template 1",
+    "isPremade": false,
+    "exercises": [
+      {
+        "name": "Exercise 1",
+        "sets": 3
+      },
+      {
+        "name": "Exercise 2",
+        "sets": 4
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "name": "Template 2",
+    "description": "Description for my Template 2",
+    "isPremade": false,
+    "exercises": [
+      {
+        "name": "Exercise 3",
+        "sets": 5
+      },
+      {
+        "name": "Exercise 4",
+        "sets": 2
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Leg Day",
+    "description": "Description for my Template 2",
+    "isPremade": false,
+    "exercises": [
+      {
+        "name": "Exercise 3",
+        "sets": 5
+      },
+      {
+        "name": "Exercise 4",
+        "sets": 2
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Premade Template 1",
+    "description": "Description for Premade Template 1",
+    "isPremade": true,
+    "exercises": [
+      {
+        "name": "Exercise 1",
+        "sets": 3
+      },
+      {
+        "name": "Exercise 2",
+        "sets": 4
+      }
+    ]
+  }
+]
