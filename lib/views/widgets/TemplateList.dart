@@ -63,7 +63,7 @@ class _TemplateListState extends State<TemplateList> {
               child: TextField(
               controller: searchController,
               decoration: InputDecoration(
-                labelText: 'Search',
+                labelText: 'Search templates',
                 prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),
