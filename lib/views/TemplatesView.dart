@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './widgets/TemplateView.dart';
 
 class TemplatesView extends StatelessWidget {
   const TemplatesView({super.key});
@@ -7,7 +8,7 @@ class TemplatesView extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Card(
-        child: Text('Templates View!')
+        child: TemplateList()
       )
     );
   }
