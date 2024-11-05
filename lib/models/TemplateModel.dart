@@ -27,13 +27,15 @@ class Template {
 }
 
 class TemplateExercise {
+  final int id;
   final String name;
   final int sets;
 
-  TemplateExercise({required this.name, required this.sets});
+  TemplateExercise({required this.id, required this.name, required this.sets});
 
   factory TemplateExercise.fromJson(Map<String, dynamic> json) {
     return TemplateExercise(
+      id: json['id'],
       name: json['name'],
       sets: json['sets'],
     );

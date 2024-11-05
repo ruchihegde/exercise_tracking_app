@@ -6,10 +6,12 @@
     "isPremade": false,
     "exercises": [
       {
+        "id": 1,
         "name": "Exercise 1",
         "sets": 3
       },
       {
+        "id": 2,
         "name": "Exercise 2",
         "sets": 4
       }
@@ -22,10 +24,12 @@
     "isPremade": false,
     "exercises": [
       {
+        "id": 3,
         "name": "Exercise 3",
         "sets": 5
       },
       {
+        "id": 4,
         "name": "Exercise 4",
         "sets": 2
       }
@@ -38,10 +42,12 @@
     "isPremade": false,
     "exercises": [
       {
+        "id": 3,
         "name": "Exercise 3",
         "sets": 5
       },
       {
+        "id": 4,
         "name": "Exercise 4",
         "sets": 2
       }
@@ -54,10 +60,12 @@
     "isPremade": true,
     "exercises": [
       {
+        "id": 1,
         "name": "Exercise 1",
         "sets": 3
       },
       {
+        "id": 2,
         "name": "Exercise 2",
         "sets": 4
       }

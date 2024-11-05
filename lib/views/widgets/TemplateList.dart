@@ -1,3 +1,4 @@
+import 'package:exercise_tracking_app/views/widgets/TemplateListItem.dart';
 import 'package:flutter/material.dart';
 import '../../services/TemplateService.dart';
 import '../../viewmodels/TemplateViewModel.dart';
@@ -83,28 +84,21 @@ class _TemplateListState extends State<TemplateList> {
                   showSelectedIcon: false,
                 )
               ),
+              const SizedBox(height: 10),
               Expanded(
-                child: ListView.builder(
-                  itemCount: templateViewModel.filteredTemplates.length,
-                  itemBuilder: (context, idx) {
-                    final template = templateViewModel.filteredTemplates[idx];
-                    return Center(
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        child: ListTile(
-                          leading: const Icon(Icons.insert_drive_file, color: Colors.blue),
-                          title: Text(
-                            template.name,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
-                  }
-                ),
+                child: templateViewModel.filteredTemplates.isNotEmpty
+                  ? ListView.builder(
+                      itemCount: templateViewModel.filteredTemplates.length,
+                      itemBuilder: (context, idx) {
+                        final template = templateViewModel.filteredTemplates[idx];
+                        return TemplateListItem(
+                          template: template,
+                          onTap: () => print('tapped ${template.name}'),
+                          isWorkout: false,
+                        );
+                      }
+                    )
+                  : const Text('No Templates Found')
               )
             ],
           )
