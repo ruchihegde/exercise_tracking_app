@@ -26,6 +26,7 @@ class Template {
   }
 }
 
+// temporary class until Exercise model is finished?
 class TemplateExercise {
   final int id;
   final String name;

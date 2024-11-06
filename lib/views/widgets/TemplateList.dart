@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../viewmodels/TemplateViewModel.dart';
 import '../../models/TemplateModel.dart';
 import 'package:provider/provider.dart';
+import '../TemplateBuilderView.dart';
 
 enum TemplateTab { myTemplates, premade }
 
@@ -43,17 +44,16 @@ class _TemplateListState extends State<TemplateList> {
   VoidCallback chooseTemplate(Template? template) {
     return () {
       if (template == null) {
-        print("chosen blank!");
+        print("Selected null!");
       }
       else {
-        print('Chosen ${template.name}');
+        print('Selected ${template.name}');
       }
     };
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: add control for when workout or not
     return Consumer<TemplateViewModel>(
       builder: (context, templateViewModel, child) {
         return Scaffold(
@@ -134,7 +134,10 @@ class _TemplateListState extends State<TemplateList> {
             visible: !widget.isWorkout,
             child: FloatingActionButton(
               onPressed: () {
-                print("clicked!");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const TemplateBuilderView())
+                );
               },
               backgroundColor: Colors.blue,
               foregroundColor: Colors.white,
