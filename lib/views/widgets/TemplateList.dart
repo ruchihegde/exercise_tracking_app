@@ -94,24 +94,36 @@ class _TemplateListState extends State<TemplateList> {
                       templateViewModel.setTab(newSelection.first);
                     },
                     showSelectedIcon: false,
+                    style: SegmentedButton.styleFrom(
+                      selectedBackgroundColor: const Color.fromARGB(200, 33, 150, 243),
+                      selectedForegroundColor: Colors.black,
+                    )
                   )
                 ),
                 const SizedBox(height: 10),
                 Visibility(
                   visible: widget.isWorkout,
                   child: Center(
-                    child: TextButton(
-                      onPressed: chooseTemplate(null),
-                      child: const Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(Icons.add),
-                          Text("Use Blank Template"),
-                        ],
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.6,
+                      child: TextButton(
+                        onPressed: chooseTemplate(null),
+                        style: TextButton.styleFrom(
+                          backgroundColor: const Color.fromARGB(255, 48, 168, 48),
+                          foregroundColor: const Color.fromARGB(255, 0, 0, 0),
+                        ),
+                        child: const Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(Icons.add),
+                            Text("Use Blank Template"),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
+                const SizedBox(height: 10),
                 Expanded(
                   child: templateViewModel.filteredTemplates.isNotEmpty
                     ? ListView.builder(

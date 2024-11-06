@@ -10,9 +10,6 @@ class TemplateService {
       String fileContent = await rootBundle.loadString('lib/data/templates.json');
       List<dynamic> jsonList = jsonDecode(fileContent);
       List<Template> templates = jsonList.map((json) => Template.fromJson(json)).toList();
-      for (Template temp in templates) {
-        print('${temp.name} ${temp.id}');
-      }
       return templates;
     }
     catch (e) {
