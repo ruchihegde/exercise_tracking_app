@@ -148,7 +148,7 @@ class _TemplateListState extends State<TemplateList> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const TemplateBuilderView())
+                  MaterialPageRoute(builder: (context) => TemplateBuilderView())
                 );
               },
               backgroundColor: Colors.blue,
