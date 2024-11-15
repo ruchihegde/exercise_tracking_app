@@ -2,6 +2,7 @@ import 'package:exercise_tracking_app/viewmodels/ExerciseViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/TemplateModel.dart';
+import '../models/ExerciseModel.dart';
 import './widgets/AddExerciseModal.dart';
 
 class TemplateBuilderView extends StatefulWidget {
@@ -19,7 +20,7 @@ class TemplateBuilderView extends StatefulWidget {
 class _TemplateBuilderViewState extends State<TemplateBuilderView> {
   String title = "";
   TextEditingController titleController = TextEditingController();
-  List<String> exercises = [];
+  List<Exercise> currentExercises = [];
 
   @override
   void initState() {
@@ -56,11 +57,16 @@ class _TemplateBuilderViewState extends State<TemplateBuilderView> {
   Future<void> _showAddExerciseModal(BuildContext context) async {
     final selectedExercises = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const AddExerciseModal()),
+      MaterialPageRoute(
+        builder: (context) => ChangeNotifierProvider(
+          create: (context) => ExerciseViewModel(),
+          child: const AddExerciseModal(),
+        )
+      ),
     );
     if (selectedExercises != null && selectedExercises.length > 0) {
       setState(() {
-        exercises.addAll(selectedExercises);
+        currentExercises.addAll(selectedExercises);
       });
     }
   }
@@ -151,7 +157,8 @@ class _TemplateBuilderViewState extends State<TemplateBuilderView> {
                     return Card(
                       child: Column(
                         children: [
-                          Text('${exercise.name} (${exercise.id})'),                        
+                          Text('${exercise.name} (${exercise.id})'),
+                          ...exercise.trackedStats.map((ex) => Text(ex.display)),               
                         ]
                       )
                     );

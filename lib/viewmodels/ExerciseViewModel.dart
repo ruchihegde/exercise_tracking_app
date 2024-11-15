@@ -7,6 +7,11 @@ class ExerciseViewModel extends ChangeNotifier {
 
   final ExerciseService _exerciseService = ExerciseService();
 
+  
+  ExerciseViewModel() {
+    fetchExercises();
+  }
+
   Future<void> fetchExercises() async {
     exercises = await _exerciseService.fetchExercises();
     notifyListeners();
