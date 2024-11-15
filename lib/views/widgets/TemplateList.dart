@@ -150,10 +150,13 @@ class _TemplateListState extends State<TemplateList> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ChangeNotifierProvider(
-                      create: (context) => ExerciseViewModel(),
+                    builder: (context) => MultiProvider(
+                      providers: [
+                        ChangeNotifierProvider(create: (context) => TemplateViewModel()),
+                        ChangeNotifierProvider(create: (context) => ExerciseViewModel())
+                      ],
                       child: const TemplateBuilderView(),
-                    ),
+                    )
                   ),
                 );
               },

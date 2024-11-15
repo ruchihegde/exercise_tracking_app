@@ -148,21 +148,17 @@ class _TemplateBuilderViewState extends State<TemplateBuilderView> {
             ),
           ),
           Expanded(
-            child: Consumer<ExerciseViewModel>(
-              builder: (context, exerciseViewModel, child) {
-                return ListView.builder(
-                  itemCount: exerciseViewModel.exercises.length,
-                  itemBuilder: (context, idx) {
-                    final exercise = exerciseViewModel.exercises[idx];
-                    return Card(
-                      child: Column(
-                        children: [
-                          Text('${exercise.name} (${exercise.id})'),
-                          ...exercise.trackedStats.map((ex) => Text(ex.display)),               
-                        ]
-                      )
-                    );
-                  }
+            child: ListView.builder(
+              itemCount: currentExercises.length,
+              itemBuilder: (context, idx) {
+                final exercise = currentExercises[idx];
+                return Card(
+                  child: Column(
+                    children: [
+                      Text('${exercise.name} (${exercise.id})'),
+                      ...exercise.trackedStats.map((ex) => Text(ex.display)),               
+                    ]
+                  )
                 );
               }
             )

@@ -1,6 +1,7 @@
 import 'package:exercise_tracking_app/viewmodels/ExerciseViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../models/ExerciseModel.dart';
 
 class AddExerciseModal extends StatefulWidget {
   const AddExerciseModal({super.key,});
@@ -10,7 +11,7 @@ class AddExerciseModal extends StatefulWidget {
 }
 
 class _AddExerciseModalState extends State<AddExerciseModal> {
-  List<String> selectedExercises = [];
+  List<Exercise> selectedExercises = [];
 
   @override
   void initState() {
@@ -37,13 +38,26 @@ class _AddExerciseModalState extends State<AddExerciseModal> {
             itemCount: exerciseViewModel.exercises.length,
             itemBuilder: (context, index) {
               final exercise = exerciseViewModel.exercises[index];
+              final isSelected = selectedExercises.contains(exercise);
               return GestureDetector(
                 onTap: () {
                   setState(() {
-                    selectedExercises.add(exercise.name);
+                    if (isSelected) {
+                      selectedExercises.remove(exercise);
+                    }
+                    else {
+                      selectedExercises.add(exercise);
+                    }
                   });
                 },
                 child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    side: BorderSide(
+                      color: isSelected ? Colors.blue : Colors.transparent,
+                      width: 3.0,
+                    )
+                  ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
