@@ -1,0 +1,42 @@
+[
+  {
+    "id": 0,
+    "name": "Barbell Squat",
+    "trackedStats": [
+      {
+        "type": "weight",
+        "unit": "lbs"
+      },
+      {
+        "type": "reps"
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "name": "Barbell Bench Press",
+    "trackedStats": [
+      {
+        "type": "weight",
+        "unit": "lbs"
+      },
+      {
+        "type": "reps"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Run",
+    "trackedStats": [
+      {
+        "type": "distance",
+        "unit": "mi"
+      },
+      {
+        "type": "time",
+        "unit": "mins"
+      }
+    ]
+  }
+]
