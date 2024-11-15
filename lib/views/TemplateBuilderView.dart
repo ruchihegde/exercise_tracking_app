@@ -1,4 +1,6 @@
+import 'package:exercise_tracking_app/viewmodels/ExerciseViewModel.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../models/TemplateModel.dart';
 import './widgets/AddExerciseModal.dart';
 
@@ -27,6 +29,9 @@ class _TemplateBuilderViewState extends State<TemplateBuilderView> {
       title = widget.starterTemplate!.name;
       titleController.text = title;
     }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<ExerciseViewModel>(context, listen: false).fetchExercises();
+    });
   }
 
   @override
@@ -37,7 +42,7 @@ class _TemplateBuilderViewState extends State<TemplateBuilderView> {
 
   void _onTitleChanged() {
     title = titleController.text;
-    print('Title is ${title}');
+    print('Title is $title');
   }
 
   void _showSnackBar(BuildContext context) {
@@ -137,11 +142,20 @@ class _TemplateBuilderViewState extends State<TemplateBuilderView> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: exercises.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(exercises[index])
+            child: Consumer<ExerciseViewModel>(
+              builder: (context, exerciseViewModel, child) {
+                return ListView.builder(
+                  itemCount: exerciseViewModel.exercises.length,
+                  itemBuilder: (context, idx) {
+                    final exercise = exerciseViewModel.exercises[idx];
+                    return Card(
+                      child: Column(
+                        children: [
+                          Text('${exercise.name} (${exercise.id})'),                        
+                        ]
+                      )
+                    );
+                  }
                 );
               }
             )

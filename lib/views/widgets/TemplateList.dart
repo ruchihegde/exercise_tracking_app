@@ -4,6 +4,7 @@ import '../../viewmodels/TemplateViewModel.dart';
 import '../../models/TemplateModel.dart';
 import 'package:provider/provider.dart';
 import '../TemplateBuilderView.dart';
+import '../../viewmodels/ExerciseViewModel.dart';
 
 enum TemplateTab { myTemplates, premade }
 
@@ -148,7 +149,12 @@ class _TemplateListState extends State<TemplateList> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => TemplateBuilderView())
+                  MaterialPageRoute(
+                    builder: (context) => ChangeNotifierProvider(
+                      create: (context) => ExerciseViewModel(),
+                      child: const TemplateBuilderView(),
+                    ),
+                  ),
                 );
               },
               backgroundColor: Colors.blue,
