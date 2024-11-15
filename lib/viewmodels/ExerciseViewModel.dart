@@ -7,7 +7,6 @@ class ExerciseViewModel extends ChangeNotifier {
 
   final ExerciseService _exerciseService = ExerciseService();
 
-  
   ExerciseViewModel() {
     fetchExercises();
   }
