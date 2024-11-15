@@ -1,4 +1,6 @@
+import 'package:exercise_tracking_app/viewmodels/ExerciseViewModel.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AddExerciseModal extends StatefulWidget {
   const AddExerciseModal({super.key,});
@@ -26,26 +28,34 @@ class _AddExerciseModalState extends State<AddExerciseModal> {
       appBar: AppBar(
         title: const Text('Add Exercise')
       ),
-      body: ListView(
-        children: [
-          ListTile(
-            title: const Text('Exercise 1'),
-            onTap: () {
-              setState(() {
-                selectedExercises.add('Exercise 1');
-              });
+      body: Consumer<ExerciseViewModel>(
+        builder: (context, exerciseViewModel, child) {
+          return GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+            ),
+            itemCount: exerciseViewModel.exercises.length,
+            itemBuilder: (context, index) {
+              final exercise = exerciseViewModel.exercises[index];
+              return GestureDetector(
+                onTap: () {
+                  setState(() {
+                    selectedExercises.add(exercise.name);
+                  });
+                },
+                child: Card(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(exercise.name),
+                      Text('ID: ${exercise.id}'),
+                    ],
+                  ),
+                ),
+              );
             },
-          ),
-          ListTile(
-            title: const Text('Exercise 2'),
-            onTap: () {
-              setState(() {
-                selectedExercises.add('Exercise 2');
-              });
-            },
-          ),
-          // Add more exercises here
-        ],
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
