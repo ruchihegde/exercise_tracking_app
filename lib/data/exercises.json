@@ -4,11 +4,11 @@
     "name": "Barbell Squat",
     "trackedStats": [
       {
-        "type": "weight",
+        "type": "Weight",
         "unit": "lbs"
       },
       {
-        "type": "reps"
+        "type": "Reps"
       }
     ]
   },
@@ -17,11 +17,11 @@
     "name": "Barbell Bench Press",
     "trackedStats": [
       {
-        "type": "weight",
+        "type": "Weight",
         "unit": "lbs"
       },
       {
-        "type": "reps"
+        "type": "Reps"
       }
     ]
   },
@@ -30,11 +30,11 @@
     "name": "Run",
     "trackedStats": [
       {
-        "type": "distance",
+        "type": "Distance",
         "unit": "mi"
       },
       {
-        "type": "time",
+        "type": "Time",
         "unit": "mins"
       }
     ]
