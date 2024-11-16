@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../models/ExerciseModel.dart';
+import 'dart:convert';
 
 class TemplateExerciseListItem {
   Exercise exercise;
@@ -94,5 +95,4 @@ class TemplateExerciseListItem {
   List<List<String>> getSetValues() {
     return controllers.map((rowControllers) => rowControllers.map((controller) => controller.text).toList()).toList();
   }
-
 }
