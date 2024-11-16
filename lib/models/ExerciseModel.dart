@@ -41,24 +41,24 @@ class ExerciseStat {
 
   factory ExerciseStat.fromJson(Map<String, dynamic> json) {
     switch(json['type']) {
-      case "weight":
+      case "Weight":
         return ExerciseStat(
           type: TrackableStat.weight,
           display: json['type'],
           unit: json['unit']
         );
-      case "reps":
+      case "Reps":
         return ExerciseStat(
           type: TrackableStat.reps,
           display: json['type'],
         );
-      case "time":
+      case "Time":
         return ExerciseStat(
           type: TrackableStat.time,
           display: json['type'],
           unit: json['unit']
         );
-      case "distance":
+      case "Distance":
         return ExerciseStat(
           type: TrackableStat.time,
           display: json['type'],
