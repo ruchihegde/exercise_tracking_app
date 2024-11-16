@@ -5,6 +5,7 @@ import '../models/TemplateModel.dart';
 import '../models/ExerciseModel.dart';
 import './widgets/AddExerciseModal.dart';
 import './widgets/CustomRoundedExpansionTile.dart';
+import './widgets/TemplateExerciseListItem.dart';
 
 class TemplateBuilderView extends StatefulWidget {
   final Template? starterTemplate;
@@ -80,12 +81,28 @@ class _TemplateBuilderViewState extends State<TemplateBuilderView> {
     }
   }
 
-  void _onSaveTemplateButtonClicked(BuildContext context) {
-    const snackBar = SnackBar(
-      content: Text('save that mf template'),
-      duration: Duration(seconds: 2)
+  void _onRemoveExerciseButtonClicked(BuildContext context, TemplateExerciseListItem exerciseItem) {
+    var snackBar = SnackBar(
+      content: Text('removing ${exerciseItem.exercise.name}'),
+      duration: const Duration(seconds: 2)
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    setState(() {
+      currentExercises.removeWhere((exercise) => exercise == exerciseItem);
+    });
+  }
+
+  void _onSaveTemplateButtonClicked(BuildContext context) {
+    // const snackBar = SnackBar(
+    //   content: Text('save that mf template'),
+    //   duration: Duration(seconds: 2)
+    // );
+    // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    for (var exerciseItem in currentExercises) {
+      for (var setVals in exerciseItem.getSetValues()) {
+        print(setVals);
+      }
+    }
   }
 
   @override
@@ -169,6 +186,11 @@ class _TemplateBuilderViewState extends State<TemplateBuilderView> {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     duration: const Duration(milliseconds: 50),
+                    leading: const Icon(Icons.chevron_left_rounded),
+                    trailing: IconButton(
+                      onPressed: () => _onRemoveExerciseButtonClicked(context, exerciseItem),
+                      icon: const Icon(Icons.highlight_remove_rounded)
+                    ),
                     isExpanded: exerciseItem.isExpanded,
                     title: Text(exerciseItem.exercise.name),
                     children: [
@@ -235,80 +257,4 @@ class _TemplateBuilderViewState extends State<TemplateBuilderView> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
-}
-
-class TemplateExerciseListItem {
-  Exercise exercise;
-  bool isExpanded;
-  List<Widget> setRows = [];
-
-  TemplateExerciseListItem({
-    required this.exercise,
-    required this.isExpanded
-  });
-
-  addSet() {
-    setRows.add(
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: exercise.trackedStats.map((stat) {
-          List<Widget> statWidgets = [
-            Text(
-              stat.display,
-              style: const TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.w400,
-              )
-            ),
-            const SizedBox(width: 10.0),
-            SizedBox(
-              width: 60.0,
-              child: TextField(
-                style: const TextStyle(
-                  fontSize: 16,
-                  color: Colors.black,
-                ),
-                decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.only(left: 10.0, bottom: -4.5),
-                  enabledBorder: const OutlineInputBorder(),
-                  focusedBorder: const OutlineInputBorder(),
-                  fillColor: Colors.grey[200],
-                  filled: true,
-                ),
-              )
-            ),
-          ];
-          if (stat.unit != null) {
-            statWidgets.addAll([
-              const SizedBox(width: 10.0),
-              Text(
-                stat.unit ?? "",
-                style: const TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.w400,
-                )  
-              )
-            ]);
-          }
-          statWidgets.add(const SizedBox(width: 20.0));
-          return Padding(
-            padding: const EdgeInsets.only(
-              top: 4,
-              bottom: 4,
-            ),
-            child: Row(
-              children: statWidgets,
-            )
-          );
-        }).toList(), 
-      )
-    );
-    print(setRows);
-  }
-
-  void removeSet(Widget set) {
-    setRows.remove(set);
-  }
-
 }
