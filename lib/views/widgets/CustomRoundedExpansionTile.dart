@@ -87,6 +87,7 @@ class _CustomRoundedExpansionTileState extends State<CustomRoundedExpansionTile>
   bool? _noTrailing;
   late AnimationController _controller;
   late AnimationController _iconController;
+  late AnimationController _leadingIconController;
 
   // When the duration of the ListTile animation is NOT provided. This value will be used instead.
   Duration defaultDuration = Duration(milliseconds: 500);
@@ -147,7 +148,7 @@ class _CustomRoundedExpansionTileState extends State<CustomRoundedExpansionTile>
             isThreeLine:
                 widget.isThreeLine == null ? false : widget.isThreeLine!,
             key: widget.key,
-            leading: widget.leading,
+            leading: _leadingIcon(),
             minLeadingWidth: widget.minLeadingWidth,
             minVerticalPadding: widget.minVerticalPadding,
             mouseCursor: widget.mouseCursor,
@@ -171,12 +172,11 @@ class _CustomRoundedExpansionTileState extends State<CustomRoundedExpansionTile>
               }
               setState(() {
                 // Checks if the ListTile is expanded and sets state accordingly.
+                _expanded = !_expanded;
                 if (_expanded) {
-                  _expanded = !_expanded;
                   _controller.forward();
                   _iconController.reverse();
                 } else {
-                  _expanded = !_expanded;
                   _controller.reverse();
                   _iconController.forward();
                 }
@@ -210,6 +210,23 @@ class _CustomRoundedExpansionTileState extends State<CustomRoundedExpansionTile>
               // If not expanded just returns an empty containter so the ExpansionTile will only show the ListTile.
               secondChild: Container()),
         ]);
+  }
+
+  Widget? _leadingIcon() {
+    if (widget.trailing != null) {
+      if (_rotateTrailing!) {
+        return RotationTransition(
+            turns: Tween(begin: 0.0, end: -0.25).animate(_iconController),
+            child: widget.leading);
+      } else {
+        // If developer sets rotateTrailing to false the widget will just be returned.
+        return widget.trailing;
+      }
+    } else {
+      // Default trailing is an Animated Menu Icon.
+      return AnimatedIcon(
+          icon: AnimatedIcons.menu_close, progress: _controller);
+    }
   }
 
   // Build trailing widget based on the user input.
