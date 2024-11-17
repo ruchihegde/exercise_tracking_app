@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'ExerciseTile.dart';
 
 class PastWorkout extends StatefulWidget {
   const PastWorkout({super.key});
@@ -8,8 +9,6 @@ class PastWorkout extends StatefulWidget {
 }
 
 class _PastWorkoutState extends State<PastWorkout>{
-  final _workoutSetInputState = _WorkoutSetInputState(); // Create state instance
-
   int _numExercises = 1;
   void _addExercise(){
     setState(() {
@@ -52,7 +51,7 @@ class _PastWorkoutState extends State<PastWorkout>{
             ),
             const SizedBox(height:15),
             for(int i = 0; i < _numExercises; i++) // have to incorporate as custom based on templates
-            WorkoutSetInput(exerciseName: 'Leg Press', isSwim: false, onDeleteExercise: _deleteExercise),
+            ExerciseTile(exerciseName: 'Leg Press', isSwim: false, onDeleteExercise: _deleteExercise),
             const SizedBox(height:15),
             const SaveWorkout(),
           ],
@@ -148,129 +147,6 @@ class WorkoutHeader extends StatelessWidget{
             fontWeight: FontWeight.bold,
           ),
         ),
-      ),
-    );
-  }
-}
-
-class WorkoutSetInput extends StatefulWidget {
-  final String exerciseName;
-  final bool isSwim;
-  final VoidCallback onDeleteExercise;
-
-  const WorkoutSetInput({super.key, required this.exerciseName, required this.isSwim, required this.onDeleteExercise});
-
-  @override
-  // ignore: library_private_types_in_public_api
-  _WorkoutSetInputState createState() => _WorkoutSetInputState();
-}
-
-class _WorkoutSetInputState extends State<WorkoutSetInput> {
-  int _numSets = 1;
-  String _selectedUnit = 'lbs';
-
-  void _changeUnit(String newUnit) {
-    setState(() {
-      _selectedUnit = newUnit;
-    });
-  }
-
-  void _addSet() {
-    setState(() {
-      _numSets++;
-    });
-  }
-  
-  void _deleteExercise() {
-    widget.onDeleteExercise(); 
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(10),
-
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  widget.exerciseName,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Row(
-                  children: [
-                    const Text('Add Notes'),
-                    IconButton(
-                      icon: const Icon(Icons.edit),
-                      onPressed: () {
-                        // Handle note editing
-                      },
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.close),
-                      onPressed: _deleteExercise,
-                    ),
-                  ],
-                ),
-              ],
-          ),
-          const SizedBox(height: 16),
-          for (int i = 0; i < _numSets; i++)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: Row(
-                children: [
-                  Text('${i + 1}. '),
-                  const Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Reps',
-                      ),
-                      keyboardType: TextInputType.number,
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  const Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Weight',
-                      ),
-                      keyboardType: TextInputType.number,
-                    ),
-                  ),
-                  Expanded(
-                    child: DropdownButtonFormField(
-                      value: 'lbs', // Default value
-                      items: const [
-                        DropdownMenuItem(value: 'lbs', child: Text('lbs')),
-                        DropdownMenuItem(value: 'kgs', child: Text('kgs')),
-                      ],
-                      onChanged: (value) {
-                        _changeUnit(value!);
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ElevatedButton(
-            onPressed: _addSet,
-            child: const Align(
-              alignment: Alignment.center,
-              child: Text('Add Set')
-            ),
-          ),
-        ],
       ),
     );
   }
