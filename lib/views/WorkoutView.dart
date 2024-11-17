@@ -18,8 +18,8 @@ class _WorkoutViewState extends State<WorkoutView> {
       appBar: AppBar(
       ),
       body: <Widget> [ // depending on what they click
-        const LiveWorkout(),
         const PastWorkout(),
+        const LiveWorkout(),
       ][_selectedIndex]
       );
   }
