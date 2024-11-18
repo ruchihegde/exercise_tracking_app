@@ -51,7 +51,7 @@ class _PastWorkoutState extends State<PastWorkout>{
             ),
             const SizedBox(height:15),
             for(int i = 0; i < _numExercises; i++) // have to incorporate as custom based on templates
-            ExerciseTile(exerciseName: 'Leg Press', isSwim: false, onDeleteExercise: _deleteExercise),
+            ExerciseTile(exerciseName: 'Leg Press', isSwim: false, onDeleteExercise: _deleteExercise, isEditable: true),
             const SizedBox(height:15),
             const SaveWorkout(),
           ],

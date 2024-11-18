@@ -5,8 +5,9 @@ class ExerciseTile extends StatefulWidget{
   final String exerciseName;
   final bool isSwim;
   final VoidCallback onDeleteExercise;
+  final bool isEditable;
 
-  const ExerciseTile({super.key, required this.exerciseName, required this.isSwim, required this.onDeleteExercise});
+  const ExerciseTile({super.key, required this.exerciseName, required this.isSwim, required this.onDeleteExercise, required this.isEditable});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -81,6 +82,7 @@ class _ExerciseTileState extends State<ExerciseTile> {
               repsController: TextEditingController(),
               weightController: TextEditingController(),
               onUnitChanged: _changeUnit,
+              isEditable: widget.isEditable,
           ),
           ElevatedButton(
             onPressed: _addSet,

@@ -20,7 +20,7 @@ class _MainViewState extends State<MainView> {
     return Scaffold(
       body: <Widget> [
           const HomeView(),
-          const WorkoutView(),
+          const WorkoutView(isLive: true),
           const TemplatesView(),
           const StatsView(),
       ][_selectedIndex],

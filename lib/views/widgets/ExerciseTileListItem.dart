@@ -5,6 +5,7 @@ class ExerciseTileListItem extends StatelessWidget {
   final TextEditingController repsController;
   final TextEditingController weightController;
   final ValueChanged<String?>? onUnitChanged;
+  final bool isEditable;
 
   const ExerciseTileListItem({
     super.key,
@@ -12,6 +13,7 @@ class ExerciseTileListItem extends StatelessWidget {
     required this.repsController,
     required this.weightController,
     required this.onUnitChanged,
+    required this.isEditable,
   });
 
   @override
@@ -21,9 +23,10 @@ class ExerciseTileListItem extends StatelessWidget {
       child: Row(
         children: [
           Text('$setNumber. '),
-          const Expanded(
+          Expanded(
             child: TextField(
-              decoration: InputDecoration(
+              enabled: isEditable,
+              decoration: const InputDecoration(
                 hintText: 'Reps',
               ),
               keyboardType: TextInputType.number,

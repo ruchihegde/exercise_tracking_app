@@ -1,5 +1,7 @@
+import 'package:exercise_tracking_app/views/widgets/WorkoutSummary.dart';
 import 'package:flutter/material.dart';
 import 'ExerciseTile.dart';
+import 'package:exercise_tracking_app/models/WorkoutModel.dart';
 
 class LiveWorkout extends StatefulWidget {
   const LiveWorkout({super.key});
@@ -9,7 +11,7 @@ class LiveWorkout extends StatefulWidget {
 }
 
 class _LiveWorkoutState extends State<LiveWorkout> {
-
+  Workout? currentWorkout;
 
   int _numExercises = 1;
   void _addExercise(){
@@ -58,6 +60,7 @@ class _LiveWorkoutState extends State<LiveWorkout> {
               exerciseName: 'Leg Press',
               isSwim: false,
               onDeleteExercise: _deleteExercise,
+              isEditable: true,
             ),
             const SizedBox(height:15),
             const SaveWorkout(),
@@ -111,7 +114,15 @@ class SaveWorkout extends StatelessWidget{
       width: MediaQuery.of(context).size.width * 0.95, 
       height: 30, 
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          // send info to workout view model to save workout in model
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const WorkoutSummary(),
+            ),
+          );
+        },
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(18.0),
@@ -119,7 +130,7 @@ class SaveWorkout extends StatelessWidget{
           backgroundColor: Colors.blue,
           padding: const EdgeInsets.all(16),
         ),
-        child:  const Column(
+        child: const Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
